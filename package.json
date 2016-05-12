@@ -162,8 +162,5 @@
     "travis-after-all": "^1.4.4",
     "validate-commit-msg": "^2.6.1",
     "watchify": "^3.7.0"
-  },
-  "peerDependencies": {
-    "react": "^0.14.7"
   }
 }
