@@ -4,22 +4,26 @@ import reactCookie from 'react-cookie';
 import Icon from '@economist/component-icon';
 
 export default class CookieMessage extends React.Component {
-  static get propTypes() {
-    return {
-      cookieName: React.PropTypes.string,
-      reactCookieInstance: React.PropTypes.object,
-    };
-  }
+
   static get defaultProps() {
     return {
       cookieName: 'ec_cookie_message_0',
       reactCookieInstance: reactCookie,
     };
   }
+
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      isCookieMessageRequired: false,
+    };
+    this.handleCloseClick = this.handleCloseClick.bind(this);
+  }
+
   componentWillMount() {
     if (typeof window === 'undefined') {
       this.setState({ isCookieMessageRequired: false });
-      return false;
+      return;
     }
     const cookie = this.props.reactCookieInstance;
     const isCookieMessageRequired = !cookie.load(this.props.cookieName);
@@ -35,6 +39,7 @@ export default class CookieMessage extends React.Component {
       cookie.save(this.props.cookieName, '1', cookieOptions);
     }
   }
+
   componentDidMount() {
     if (typeof window !== 'undefined' && window.document) {
       const trusteScript = document.createElement('script');
@@ -44,12 +49,14 @@ export default class CookieMessage extends React.Component {
       document.head.appendChild(trusteScript);
     }
   }
-  onCloseClick() {
+
+  handleCloseClick() {
     this.setState({ isCookieMessageRequired: false });
   }
+
   render() {
     if (!this.state.isCookieMessageRequired) {
-      return false;
+      return null;
     }
 
     const policyLink = (
@@ -61,7 +68,7 @@ export default class CookieMessage extends React.Component {
     );
     const preferencesLink = (
       <span id="teconsent-preferences"
-        className="cookie-message--link__preferences cookie-message--link"
+        className="cookie-message--link-preferences cookie-message--link"
       >
         <a href="//www.economist.com/cookies-info"
           className="cookie-message--link
@@ -74,7 +81,8 @@ export default class CookieMessage extends React.Component {
     return (
       <div className="cookie-message">
         <div className="cookie-message--message-container">
-          <span onClick={() => this.onCloseClick()}
+          <span
+            onClick={this.handleCloseClick}
             className="cookie-message--close-wrapper"
             tabIndex={0}
           >
@@ -86,4 +94,14 @@ export default class CookieMessage extends React.Component {
       </div>
     );
   }
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  CookieMessage.propTypes = {
+    cookieName: React.PropTypes.string,
+    reactCookieInstance: React.PropTypes.shape({
+      load: React.PropTypes.func.isRequired,
+      save: React.PropTypes.func.isRequired,
+    }),
+  };
 }
