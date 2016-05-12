@@ -1,6 +1,6 @@
 import React from 'react';
-import CookieMessage from '../index.es6';
-import reactCookie from 'react-cookie';
+import { renderToString } from 'react-dom/server';
+import CookieMessage from '../src';
 import chai from 'chai';
 import chaiSpies from 'chai-spies';
 chai.use(chaiSpies).should();
@@ -16,35 +16,30 @@ describe('CookieMessage component', () => {
   });
   describe('cookie', () => {
     function renderCookieMessage(reactCookieInstance) {
-      return React.renderToString(
+      return renderToString(
         <CookieMessage reactCookieInstance={reactCookieInstance} />
       );
     }
     const cookieName = 'ec_cookie_message_0';
     let cookie = null;
     beforeEach(() => {
-      cookie = Object.create(reactCookie);
-    });
-    afterEach(() => {
-      /* eslint-disable brace-style */
-      if (cookie.load.restore) { cookie.load.restore(); }
-      if (cookie.save.restore) { cookie.save.restore(); }
+      cookie = {
+        load: chai.spy(() => false),
+        save: chai.spy('save'),
+      };
     });
     it('is set if no cookie present', () => {
-      chai.spy.on(cookie, 'load', () => false);
-      chai.spy.on(cookie, 'save');
       renderCookieMessage(cookie);
       cookie.save.should.have.been.called.with(cookieName);
     });
     it('is not set if it exists', () => {
-      chai.spy.on(cookie, 'load', () => true);
+      cookie.load = chai.spy(() => true);
       renderCookieMessage(cookie);
       cookie.save.should.not.have.been.called();
     });
     it('does not return a message if the cookie exists', () => {
-      chai.spy.on(cookie, 'load', () => true);
+      cookie.load = chai.spy(() => true);
       const cookieMessageRenderedString = renderCookieMessage(cookie);
-      cookieMessageRenderedString.should.contain('<noscript');
       cookieMessageRenderedString.should.not.contain('cookie');
     });
   });
