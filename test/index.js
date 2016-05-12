@@ -1,7 +1,9 @@
 import React from 'react';
 import CookieMessage from '../index.es6';
 import reactCookie from 'react-cookie';
-import { stub, spy } from 'sinon';
+import chai from 'chai';
+import chaiSpies from 'chai-spies';
+chai.use(chaiSpies).should();
 
 describe('CookieMessage component', () => {
   it('is compatible with React.Component', () => {
@@ -29,19 +31,18 @@ describe('CookieMessage component', () => {
       if (cookie.save.restore) { cookie.save.restore(); }
     });
     it('is set if no cookie present', () => {
-      stub(cookie, 'load').returns(false);
-      spy(cookie, 'save');
+      chai.spy.on(cookie, 'load', () => false);
+      chai.spy.on(cookie, 'save');
       renderCookieMessage(cookie);
-      cookie.save.calledWith(cookieName).should.equal(true);
+      cookie.save.should.have.been.called.with(cookieName);
     });
     it('is not set if it exists', () => {
-      stub(cookie, 'load').returns(true);
-      spy(cookie, 'save');
+      chai.spy.on(cookie, 'load', () => true);
       renderCookieMessage(cookie);
-      cookie.save.called.should.equal(false);
+      cookie.save.should.not.have.been.called();
     });
     it('does not return a message if the cookie exists', () => {
-      stub(cookie, 'load').returns(true);
+      chai.spy.on(cookie, 'load', () => true);
       const cookieMessageRenderedString = renderCookieMessage(cookie);
       cookieMessageRenderedString.should.contain('<noscript');
       cookieMessageRenderedString.should.not.contain('cookie');
