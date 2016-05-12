@@ -1,1 +1,4 @@
+@import '@economist/component-typography';
+@import '@economist/component-palette';
+@import '@economist/component-grid';
 @import './index.css';

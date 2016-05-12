@@ -101,14 +101,14 @@
     ]
   },
   "dependencies": {
-    "@economist/component-grid": "^1.3.0",
     "@economist/component-icon": "^5.2.1",
-    "@economist/component-palette": "^1.4.2",
-    "@economist/component-typography": "^3.1.1",
     "react": "^0.14.8||^15.0.0",
     "react-cookie": "^0.3.4"
   },
   "devDependencies": {
+    "@economist/component-grid": "^1.3.2",
+    "@economist/component-palette": "^1.5.1",
+    "@economist/component-typography": "^3.1.4",
     "@economist/doc-pack": "^1.0.7",
     "@economist/provision-react-component": "3.0.3",
     "babel-cli": "^6.6.5",

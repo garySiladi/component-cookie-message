@@ -1,11 +1,7 @@
-@import '@economist/component-typography';
-@import '@economist/component-palette';
-@import '@economist/component-grid';
-
 .cookie-message--link, .cookie-message--link:visited {
   color: inherit;
   text-decoration: none;
-  border-bottom: 1px solid var(--color-london);
+  border-bottom: 1px solid var(--cookiemessage--link-border-color, var(--color-london));
 }
 
 .cookie-message {
@@ -15,10 +11,10 @@
   padding:
     var(--cookiemessage-vertical-padding, var(--grid-spacing-sheep))
     var(--cookiemessage-horizontal-padding, var(--grid-gutter-s));
-  font-family: var(--fontfamily-sans);
-  font-size: var(--text-size-step--2);
-  line-height: var(--text-line-height-sans-on-step--2);
-  background: var(--color-berlin);
+  font-family: var(--cookiemessage-font-family, var(--fontfamily-sans));
+  font-size: var(--cookiemessage-font-size, var(--text-size-step--2));
+  line-height: var(--cookiemessage-line-height, var(--text-line-height-sans-on-step--2));
+  background: var(--cookiemessage-background, var(--color-berlin));
 }
 
 .cookie-message--close {
@@ -27,7 +23,7 @@
    * 1em of useless space surrounding it. */
   width: 2em;
   height: 2em;
-  fill: var(--color-beijing);
+  fill: var(--cookiemessage--icon-fill, var(--color-beijing));
 }
 
 .cookie-message--close-wrapper {
@@ -44,7 +40,7 @@
 
 .cookie-message--message-container {
   position: relative;
-  padding-right: var(--grid-spacing-donkey);
+  padding-right: var(--cookiemessage--container-padding, var(--grid-spacing-donkey));
 }
 
 @media screen and (min-width: 1024px) {
@@ -55,7 +51,7 @@
         var(--cookiemessage-min-height, 64px) / 2 -
         var(--cookiemessage-vertical-padding, var(--grid-spacing-sheep)) -
         0.5em *
-        var(--text-line-height-sans-on-step--2)
+        var(--cookiemessage-line-height, var(--text-line-height-sans-on-step--2))
       );
   }
 }
