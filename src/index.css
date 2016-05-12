@@ -1,6 +1,6 @@
-@import "@economist/component-typography";
-@import "@economist/component-palette";
-@import "@economist/component-grid";
+@import '@economist/component-typography';
+@import '@economist/component-palette';
+@import '@economist/component-grid';
 
 .cookie-message--link, .cookie-message--link:visited {
   color: inherit;
@@ -9,39 +9,37 @@
 }
 
 .cookie-message {
+  overflow: hidden;
+  box-sizing: border-box;
+  min-height: var(--cookiemessage-min-height, 64px);
+  padding:
+    var(--cookiemessage-vertical-padding, var(--grid-spacing-sheep))
+    var(--cookiemessage-horizontal-padding, var(--grid-gutter-s));
   font-family: var(--fontfamily-sans);
   font-size: var(--text-size-step--2);
   line-height: var(--text-line-height-sans-on-step--2);
-  padding: var(--cookiemessage-vertical-padding, var(--grid-spacing-sheep)) var(--cookiemessage-horizontal-padding, var(--grid-gutter-s));
-  box-sizing: border-box;
-  min-height: var(--cookiemessage-min-height, 64px);
   background: var(--color-berlin);
-  overflow: hidden;
 }
 
 .cookie-message--close {
   /* Not magic numbers.
    * The icon is supposed to have 1em of height, but it currently has
    * 1em of useless space surrounding it. */
-  height: 2em;
   width: 2em;
-
+  height: 2em;
   fill: var(--color-beijing);
 }
 
 .cookie-message--close-wrapper {
   position: absolute;
-  right: var(--grid-gutter-s);
-
-  cursor: pointer;
-
-  /* Compensate Icon's white space */
   top: -0.5em;
   right: -0.5em;
+  /* Compensate Icon's white space */
   /* Fat-finger friendliness */
   /* padding:1em offsets it to the sides, pull it back in. */
-  padding: 1em;
   margin: -1em;
+  padding: 1em;
+  cursor: pointer;
 }
 
 .cookie-message--message-container {
@@ -52,18 +50,23 @@
 @media screen and (min-width: 1024px) {
   .cookie-message--message-container {
     /* Vertically align the cookie message. */
-    top: 0.5em;
-    top: calc(
-      var(--cookiemessage-min-height, 64px) / 2 -
-      var(--cookiemessage-vertical-padding, var(--grid-spacing-sheep)) -
-      0.5em *
-      var(--text-line-height-sans-on-step--2)
-    );
+    top:
+      calc(
+        var(--cookiemessage-min-height, 64px) / 2 -
+        var(--cookiemessage-vertical-padding, var(--grid-spacing-sheep)) -
+        0.5em *
+        var(--text-line-height-sans-on-step--2)
+      );
   }
 }
 
-.cookie-message__link--temporary-cookie-preferences { display: none; }
-.cookie-message--link__preferences :only-of-type { display: inline; }
+.cookie-message__link--temporary-cookie-preferences {
+  display: none;
+}
+
+.cookie-message--link-preferences :only-of-type {
+  display: inline;
+}
 
 .cookie-message--link:hover {
   color: var(--cookiemessage-link-hover, var(--color-chicago));
@@ -73,4 +76,3 @@
 .cookie-message--close-wrapper:hover .cookie-message--close {
   fill: var(--cookiemessage-link-hover, var(--color-chicago));
 }
-

@@ -11,13 +11,13 @@ describe('CookieMessage component', () => {
   });
   it('renders a React element', () => {
     React.isValidElement(
-      <CookieMessage/>
+      <CookieMessage />
     ).should.equal(true);
   });
   describe('cookie', () => {
     function renderCookieMessage(reactCookieInstance) {
       return React.renderToString(
-        <CookieMessage reactCookieInstance={reactCookieInstance}/>
+        <CookieMessage reactCookieInstance={reactCookieInstance} />
       );
     }
     const cookieName = 'ec_cookie_message_0';
