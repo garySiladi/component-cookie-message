@@ -102,7 +102,7 @@
   },
   "dependencies": {
     "@economist/component-icon": "^5.2.1",
-    "react": "^0.14.8||^15.0.0",
+    "react": "^15.1.0",
     "react-cookie": "^0.4.5"
   },
   "devDependencies": {
