@@ -48,11 +48,11 @@
     /* Vertically align the cookie message. */
     top:
       calc(
-        var(--cookiemessage-min-height, 64px) / 2 -
-        var(--cookiemessage-vertical-padding, var(--grid-spacing-sheep)) -
-        0.5em *
-        var(--cookiemessage-line-height, var(--text-line-height-sans-on-step--2))
-      );
+          var(--cookiemessage-min-height, 64px) / 2 -
+          var(--cookiemessage-vertical-padding, var(--grid-spacing-sheep)) -
+          0.5em *
+          var(--cookiemessage-line-height, var(--text-line-height-sans-on-step--2))
+        );
   }
 }
 

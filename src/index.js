@@ -20,14 +20,16 @@ export default class CookieMessage extends React.Component {
     this.handleCloseClick = this.handleCloseClick.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (typeof window === 'undefined') {
+      /* eslint-disable */
       this.setState({ isCookieMessageRequired: false });
       return;
     }
     const cookie = this.props.reactCookieInstance;
     const isCookieMessageRequired = !cookie.load(this.props.cookieName);
     this.setState({ isCookieMessageRequired });
+    /* eslint-enable */
     if (isCookieMessageRequired) {
       const isHttps = window.location.protocol === 'https:';
       const cookieOptions = {
@@ -38,9 +40,7 @@ export default class CookieMessage extends React.Component {
       };
       cookie.save(this.props.cookieName, '1', cookieOptions);
     }
-  }
 
-  componentDidMount() {
     if (typeof window !== 'undefined' && window.document) {
       const trusteScript = document.createElement('script');
       trusteScript.async = true;
@@ -71,8 +71,7 @@ export default class CookieMessage extends React.Component {
         className="cookie-message--link-preferences cookie-message--link"
       >
         <a href="//www.economist.com/cookies-info"
-          className="cookie-message--link
-          cookie-message__link--temporary-cookie-preferences"
+          className="cookie-message--link cookie-message__link--temporary-cookie-preferences"
         >
           cookies preferences
         </a>
