@@ -21,13 +21,9 @@ export default class CookieMessage extends React.Component {
   }
 
   componentDidMount() {
-    if (typeof window === 'undefined') {
-      /* eslint-disable */
-      this.setState({ isCookieMessageRequired: false });
-      return;
-    }
     const cookie = this.props.reactCookieInstance;
     const isCookieMessageRequired = !cookie.load(this.props.cookieName);
+    /* eslint-disable */
     this.setState({ isCookieMessageRequired });
     /* eslint-enable */
     if (isCookieMessageRequired) {

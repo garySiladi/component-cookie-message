@@ -20,18 +20,12 @@ describe('CookieMessage component', () => {
         <CookieMessage reactCookieInstance={reactCookieInstance} />
       );
     }
-    const cookieName = 'ec_cookie_message_0';
     let cookie = null;
     beforeEach(() => {
       cookie = {
         load: chai.spy(() => false),
         save: chai.spy('save'),
       };
-    });
-    // Currently disabled due to moving cookie stuff to after rendering.
-    it.skip('is set if no cookie present', () => {
-      renderCookieMessage(cookie);
-      cookie.save.should.have.been.called.with(cookieName);
     });
     it('is not set if it exists', () => {
       cookie.load = chai.spy(() => true);
