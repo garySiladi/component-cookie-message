@@ -80,6 +80,7 @@ export default class CookieMessage extends React.Component {
             onClick={this.handleCloseClick}
             className="cookie-message--close-wrapper"
             tabIndex={0}
+            role="button"
           >
             <Icon icon="close" className="cookie-message--close" />
           </span>
