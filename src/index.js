@@ -1,4 +1,4 @@
-/* global window document */
+ /* global window document */
 import React from 'react';
 import reactCookie from 'react-cookie';
 import Icon from '@economist/component-icon';
@@ -55,35 +55,41 @@ export default class CookieMessage extends React.Component {
       return null;
     }
 
-    const policyLink = (
-      <a href="//www.economist.com/cookies-info"
-        className="cookie-message--link cookie-message--link__policy"
-      >
-        cookies policy
-      </a>
+    const closeButtonProps = {
+      className: 'cookie-message--close-wrapper',
+      tabIndex: 0,
+      role: 'button',
+      onClick: this.handleCloseClick,
+      children: <Icon icon="close" className="cookie-message--close" />,
+    };
+    const closeButton = this.props.renderCloseButton ? this.props.renderCloseButton(closeButtonProps) : (
+      <span {...closeButtonProps}></span>
     );
-    const preferencesLink = (
-      <span id="teconsent-preferences"
-        className="cookie-message--link-preferences cookie-message--link"
-      >
-        <a href="//www.economist.com/cookies-info"
-          className="cookie-message--link cookie-message__link--temporary-cookie-preferences"
-        >
+
+    const policyLinkProps = {
+      className: 'cookie-message--link cookie-message--link__policy',
+      href: '//www.economist.com/cookies-info',
+      children: 'cookies policy',
+    };
+    const policyLink = this.props.renderPolicyLink ? this.props.renderPolicyLink(policyLinkProps) : (
+      <a {...policyLinkProps}></a>
+    );
+
+    const preferencesLinkProps = {
+      className: 'cookie-message--link-preferences cookie-message--link',
+      id: 'teconsent-preferences',
+      children: <a href="//www.economist.com/cookies-info"
+        className="cookie-message--link cookie-message__link--temporary-cookie-preferences"
+                >
           cookies preferences
-        </a>
-      </span>
-    );
+        </a>,
+    };
+    const preferencesLink = this.props.renderPreferencesLink ?
+      this.props.renderPreferencesLink(preferencesLinkProps) : (<span {...preferencesLinkProps}></span>);
     return (
       <div className="cookie-message">
         <div className="cookie-message--message-container">
-          <span
-            onClick={this.handleCloseClick}
-            className="cookie-message--close-wrapper"
-            tabIndex={0}
-            role="button"
-          >
-            <Icon icon="close" className="cookie-message--close" />
-          </span>
+          {closeButton}
           By continuing to browse this site you are agreeing to our use of cookies.
           Review our {policyLink} for details or change your {preferencesLink}.
         </div>
@@ -99,5 +105,8 @@ if (process.env.NODE_ENV !== 'production') {
       load: React.PropTypes.func.isRequired,
       save: React.PropTypes.func.isRequired,
     }),
+    renderCloseButton: React.PropTypes.func,
+    renderPolicyLink: React.PropTypes.func,
+    renderPreferencesLink: React.PropTypes.func,
   };
 }
