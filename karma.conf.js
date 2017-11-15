@@ -97,5 +97,14 @@ module.exports = function configureKarma(config) {
         build: configureBuildValue(),
       },
     });
+  } else {
+    config.set({
+      files: [
+        // We want to add the polyfill specifically to phantomjs,
+        // because it does not support some of the es6 features, e.g. Map().
+        'node_modules/babel-polyfill/browser.js',
+        path.join(packageJson.directories.test, '*.js'),
+      ],
+    });
   }
 };
