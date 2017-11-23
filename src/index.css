@@ -32,7 +32,7 @@
   right: -0.5em;
   /* Compensate Icon's white space */
   /* Fat-finger friendliness */
-  /* padding:1em offsets it to the sides, pull it back in. */
+  /* padding:1em offsets it to the sides, pull it back in */
   margin: -1em;
   padding: 1em;
   cursor: pointer;
