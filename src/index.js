@@ -91,7 +91,7 @@ export default class CookieMessage extends React.Component {
       <div className="cookie-message">
         <div className="cookie-message--message-container">
           {closeButton}
-          By continuing to browse this site you are agreeing to our use of cookies.
+          By continuing to browse this site you permit us and our partners to place identification cookies on your browser and agree to our use of cookies.
           Review our {policyLink} for details or change your {preferencesLink}.
         </div>
       </div>
